@@ -34,14 +34,14 @@ resource "null_resource" "spc" {
   }
   provisioner "file" {
     source      = "./spc.service"
-    destination = "/home/ubuntu/spc.service"
+    destination = "/tmp/spc.service"
 
   }
   provisioner "remote-exec" {
     inline = [
       "sudo apt update",
       "sudo apt install openjdk-17-jdk maven -y",
-      "sudo cp /home/ubuntu/spc.service /etc/systemd/system/spc.service",
+      "sudo cp /tmp/spc.service /etc/systemd/system/spc.service",
       "git clone https://github.com/spring-projects/spring-petclinic.git",
       "cd spring-petclinic",
       "./mvnw package",
