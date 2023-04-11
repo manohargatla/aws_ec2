@@ -7,6 +7,7 @@ resource "aws_key_pair" "deployer" {
 
 ## create EC2 instance
 resource "aws_instance" "red" {
+  count = length(lb_vpc_info.ec2_names) == true ? red : green
   instance_type               = "t2.micro"
   associate_public_ip_address = "true"
   ami                         = "ami-007855ac798b5175e"
